@@ -39,16 +39,23 @@ public class concesionario {
                System.out.println("4. Exit");
           }
 
+<<<<<<< Updated upstream
           //MAIN FUNCTION: Show all the user options and connect the other objects for getting information for inventory
           public void dealerShip_Options(Scanner scannerUser){
 
+=======
+          //---Logic of options
+          public void dealerShip_Options(Scanner scannerUser, DealerShip dealerShip){
+               
+               //loop that will be executing until the user choose the option 4
+>>>>>>> Stashed changes
                while(true){
                     showMenu();
                     int Option_Chosen_ByUser = scannerUser.nextInt();
                     scannerUser.nextLine();
 
                     switch (Option_Chosen_ByUser) {
-                         case 1-> getInventory();
+                         case 1-> System.out.println(getInventory());
                          
                          case 2 -> filter(scannerUser);
 
@@ -64,12 +71,15 @@ public class concesionario {
 
           //Get inventory 
           public HashMap<String,HashMap<String,Object>> getInventory(){
-               System.out.println(this.Inventory);
                return this.Inventory;
           }
           
 
+<<<<<<< Updated upstream
           //Show menu abot filter
+=======
+          //----------------Show menu about filter---------------------------
+>>>>>>> Stashed changes
           public void ShowMenu_Filter(){
                System.err.println("Choose one option: ");
                System.err.println("Filter by brand: ");
@@ -83,22 +93,106 @@ public class concesionario {
           public void filter(Scanner scannerUser){
                ShowMenu_Filter();
                int Filter_ByUser = scannerUser.nextInt();
+               scannerUser.nextLine();
 
                switch(Filter_ByUser){
+<<<<<<< Updated upstream
                     case 3 -> filterPrice(scannerUser);
                }
           }
 
           //filter by price
           public void filterPrice(Scanner scannerUser){
+=======
+                    case 1 -> filterBrand(scannerUser, dealerShip);
+                    case 2 -> filterType(scannerUser, dealerShip);
+                    case 3 -> filterPrice(scannerUser, dealerShip);
+                    case 4 -> filterAvailability(scannerUser, dealerShip);
+               }
+          }
+
+          //---filter by price
+          public void filterPrice(Scanner scannerUser, DealerShip dealerShip){
+>>>>>>> Stashed changes
                System.out.println("Valor mayor a: ");
                BigDecimal filter_price_bigDecimal = scannerUser.nextBigDecimal();
                scannerUser.nextLine();
 
+<<<<<<< Updated upstream
                
           }
 
           //Add Vehicle function
+=======
+               for (var entry: dealerShip.getInventory().entrySet()){
+                    HashMap<String,Object> vehicleData = entry.getValue();
+
+                    BigDecimal bigDecimal_price = new BigDecimal(((Number) vehicleData.get("price")).doubleValue());
+
+                    if(filter_price_bigDecimal.compareTo(bigDecimal_price)>0){
+                         System.out.println("Vehicle Data: "+ vehicleData); //print vehicle data
+                    } 
+               }
+           }
+          
+
+          //---filter by brand
+          public void filterBrand(Scanner scanner, DealerShip dealerShip){
+               System.out.println("Enter your brand: ");
+               String filter_brand = scanner.nextLine();
+
+               //loop to filter the brand in all dictionary
+               for (var entry : dealerShip.getInventory().entrySet()) {
+                         String brand = entry.getKey(); // get key
+
+                         if(filter_brand.equals(brand)){
+                         HashMap<String, Object> vehicleData = entry.getValue(); // get value
+                    
+                         //print vehicle data
+                         System.out.println("Vehicle data: " + vehicleData);
+                    }
+                }
+                
+          }
+
+          //---filter by type
+          public void filterType(Scanner scanner, DealerShip dealerShip){
+               System.out.println("Enter your vehicle type");
+               String filter_Type = scanner.nextLine();
+
+               //crear bucle para filtrar por tipo
+               for (var entry: dealerShip.getInventory().entrySet()){
+                    String type = entry.getKey(); //get key
+
+                    if(filter_Type.equals(type)){
+                         HashMap<String,Object> vehicleData = entry.getValue(); //get all values from vehicleData
+
+                         //print vehicle data
+                         System.out.println("Vehicle Data: "+ vehicleData);
+                    }
+               }
+          }
+
+          //---filter by availability
+          public void filterAvailability(Scanner scanner, DealerShip dealerShip){
+               System.out.println("Enter the Vehicle Availability (y/n)");
+               String AvailabilityInput_filter = scanner.nextLine();
+
+               boolean x = AvailabilityInput_filter.equals("y");
+
+               //crear bucle para filtar por disponibilidad
+               for (var entry: dealerShip.getInventory().entrySet()){
+                    HashMap<String,Object> vehicleData = entry.getValue();
+
+                    if(x == (boolean) vehicleData.get("Availability")){
+                         System.out.println("Vehicle Data: "+ vehicleData); //print vehicle data
+                    } 
+               }
+          }
+
+
+          //---Add Vehicle function
+>>>>>>> Stashed changes
           public void AddProduct(Scanner scannerUser){
 
                //model
